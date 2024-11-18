@@ -22,6 +22,15 @@ abstract class PostStoreBase with Store {
   @observable
   bool isLoading = false;
 
+  PostStoreBase() {
+    init();
+  }
+
+  @action
+  Future<void> init() async {
+    await loadPosts();
+  }
+
   @action
   Future<void> loadPosts() async {
     isLoading = true;

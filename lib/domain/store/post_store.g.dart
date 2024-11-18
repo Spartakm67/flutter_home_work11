@@ -72,6 +72,14 @@ mixin _$PostStore on PostStoreBase, Store {
     });
   }
 
+  late final _$initAsyncAction =
+      AsyncAction('PostStoreBase.init', context: context);
+
+  @override
+  Future<void> init() {
+    return _$initAsyncAction.run(() => super.init());
+  }
+
   late final _$loadPostsAsyncAction =
       AsyncAction('PostStoreBase.loadPosts', context: context);
 
