@@ -29,7 +29,8 @@ class CommentsScreen extends StatelessWidget {
             itemBuilder: (context, index) {
               final comment = postStore.comments[index];
               return Card(
-                margin: const EdgeInsets.all(8.0),
+                elevation: 3,
+                margin: const EdgeInsets.all(10.0),
                 child: ListTile(
                   title: Text(comment.name),
                   subtitle: Text(comment.body),

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_home_work11/domain/store/post_store.dart';
-import 'package:flutter_home_work11/presentation/screens/comments_screen.dart';
 
 class PostListScreen extends StatelessWidget {
   final PostStore postStore = PostStore();
@@ -27,12 +26,13 @@ class PostListScreen extends StatelessWidget {
             itemBuilder: (context, index) {
               final post = postStore.posts[index];
               return Card(
-                margin: const EdgeInsets.all(8.0),
+                elevation: 3,
+                margin: const EdgeInsets.all(10.0),
                 child: ListTile(
                   title: Text(post.title),
                   subtitle: Text(post.body),
                   trailing: IconButton(
-                    icon: const Icon(Icons.delete, color: Colors.red),
+                    icon: const Icon(Icons.delete_forever, color: Colors.deepOrange),
                     onPressed: () async {
                       final scaffoldMessenger = ScaffoldMessenger.of(context);
                       await postStore.deletePost(post.id);
@@ -48,13 +48,11 @@ class PostListScreen extends StatelessWidget {
                     },
                   ),
                   onTap: () {
-                    Navigator.pushNamed(context, '/comments', arguments: {'postId': post.id},);
-                    // Navigator.push(
-                    //   context,
-                    //   MaterialPageRoute(
-                    //     builder: (_) => CommentsScreen(postId: post.id),
-                    //   ),
-                    // );
+                    Navigator.pushNamed(
+                      context,
+                      '/comments',
+                      arguments: {'postId': post.id},
+                    );
                   },
                 ),
               );
