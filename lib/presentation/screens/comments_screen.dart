@@ -32,9 +32,19 @@ class CommentsScreen extends StatelessWidget {
                 elevation: 3,
                 margin: const EdgeInsets.all(10.0),
                 child: ListTile(
-                  title: Text(comment.name),
-                  subtitle: Text(comment.body),
-                  trailing: Text(comment.email, style: const TextStyle(fontSize: 12)),
+                  title: Text('Name: ${comment.name}'),
+                  subtitle: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Email: ${comment.email}',
+                        style: const TextStyle(fontSize: 12),
+                      ),
+                      const SizedBox(height: 4),
+                      Text('Comment: ${comment.body}'),
+                    ],
+                  ),
+                  isThreeLine: true,
                 ),
               );
             },

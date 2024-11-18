@@ -29,10 +29,11 @@ class PostListScreen extends StatelessWidget {
                 elevation: 3,
                 margin: const EdgeInsets.all(10.0),
                 child: ListTile(
-                  title: Text(post.title),
-                  subtitle: Text(post.body),
+                  title: Text('Name: ${post.title}'),
+                  subtitle: Text('Post: ${post.body}'),
                   trailing: IconButton(
-                    icon: const Icon(Icons.delete_forever, color: Colors.deepOrange),
+                    icon: const Icon(Icons.delete_forever,
+                        color: Colors.deepOrange,),
                     onPressed: () async {
                       final scaffoldMessenger = ScaffoldMessenger.of(context);
                       await postStore.deletePost(post.id);
