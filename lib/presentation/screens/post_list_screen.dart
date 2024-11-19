@@ -1,13 +1,43 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_home_work11/domain/store/post_store.dart';
+import 'package:flutter_home_work11/domain/store/scroll_store.dart';
 import 'package:flutter_home_work11/presentation/widgets/custom_app_bar.dart';
 import 'package:flutter_home_work11/presentation/styles/text_styles.dart';
 
-class PostListScreen extends StatelessWidget {
-  final PostStore postStore = PostStore();
+class PostListScreen extends StatefulWidget {
+  const PostListScreen({super.key});
 
-  PostListScreen({super.key});
+  @override
+  State<PostListScreen> createState() => _PostListScreenState();
+}
+
+class _PostListScreenState extends State<PostListScreen> {
+  final PostStore postStore = PostStore();
+  final ScrollStore scrollStore = ScrollStore();
+  final ScrollController _scrollController = ScrollController();
+
+  @override
+  void initState() {
+    super.initState();
+    _scrollController.addListener(() {
+      scrollStore.updateScrollPosition(_scrollController.offset);
+    });
+  }
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
+  }
+
+  void _scrollToTop() {
+    _scrollController.animateTo(
+      0,
+      duration: const Duration(milliseconds: 500),
+      curve: Curves.easeInOut,
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -22,6 +52,7 @@ class PostListScreen extends StatelessWidget {
             return Center(child: Text('Error: ${postStore.errorMessage}'));
           }
           return ListView.builder(
+            controller: _scrollController,
             itemCount: postStore.posts.length,
             itemBuilder: (context, index) {
               final post = postStore.posts[index];
@@ -56,7 +87,7 @@ class PostListScreen extends StatelessWidget {
                             ),
                             TextSpan(
                               text: post.body,
-                              style: TextStyles.spanBodyText
+                              style: TextStyles.spanBodyText,
                             ),
                           ],
                         ),
@@ -121,6 +152,14 @@ class PostListScreen extends StatelessWidget {
             },
           );
         },
+      ),
+      floatingActionButton: Observer(
+        builder: (_) => scrollStore.showScrollToTopButton
+            ? FloatingActionButton(
+                onPressed: _scrollToTop,
+                child: const Icon(Icons.arrow_upward),
+              )
+            : const SizedBox.shrink(),
       ),
     );
   }
