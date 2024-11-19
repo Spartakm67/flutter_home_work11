@@ -1,6 +1,43 @@
 import 'package:flutter/material.dart';
 
 class TextStyles {
+
+  static const TextStyle appBarText = TextStyle(
+    fontSize: 22,
+    fontWeight: FontWeight.bold,
+    color: Colors.white,
+  );
+
+  static const TextStyle spanKeyText = TextStyle(
+    fontWeight: FontWeight.bold,
+    fontSize: 14,
+    color: Colors.black,
+  );
+
+  static const TextStyle spanPostText = TextStyle(
+    fontWeight: FontWeight.bold,
+    fontSize: 12,
+    color: Colors.black,
+  );
+
+  static const TextStyle spanBodyText = TextStyle(
+    fontWeight: FontWeight.normal,
+    fontSize: 12,
+    color: Colors.blueGrey,
+  );
+
+  static const TextStyle spanTitleText = TextStyle(
+    fontWeight: FontWeight.normal,
+    fontSize: 14,
+    color: Colors.blue,
+  );
+
+  static const TextStyle spanEmailText = TextStyle(
+    fontSize: 12,
+    color: Colors.blue,
+    decoration: TextDecoration.underline,
+  );
+
   static const TextStyle buttonText = TextStyle(
     fontSize: 18,
     color: Colors.indigo,

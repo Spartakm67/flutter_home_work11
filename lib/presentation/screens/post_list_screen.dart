@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_home_work11/domain/store/post_store.dart';
 import 'package:flutter_home_work11/presentation/widgets/custom_app_bar.dart';
+import 'package:flutter_home_work11/presentation/styles/text_styles.dart';
 
 class PostListScreen extends StatelessWidget {
   final PostStore postStore = PostStore();
@@ -28,8 +29,40 @@ class PostListScreen extends StatelessWidget {
                 elevation: 3,
                 margin: const EdgeInsets.all(10.0),
                 child: ListTile(
-                  title: Text('Name: ${post.title}'),
-                  subtitle: Text('Post: ${post.body}'),
+                  title: RichText(
+                    text: TextSpan(
+                      children: [
+                        const TextSpan(
+                          text: 'Name: ',
+                          style: TextStyles.spanKeyText,
+                        ),
+                        TextSpan(
+                          text: post.title,
+                          style: TextStyles.spanTitleText,
+                        ),
+                      ],
+                    ),
+                  ),
+                  subtitle: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const SizedBox(height: 4),
+                      RichText(
+                        text: TextSpan(
+                          children: [
+                            const TextSpan(
+                              text: 'Post: ',
+                              style: TextStyles.spanPostText,
+                            ),
+                            TextSpan(
+                              text: post.body,
+                              style: TextStyles.spanBodyText
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
                   trailing: IconButton(
                     icon: const Icon(
                       Icons.delete_forever,
