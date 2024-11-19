@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_home_work11/domain/store/post_store.dart';
+import 'package:flutter_home_work11/presentation/widgets/custom_app_bar.dart';
 
 class CommentsScreen extends StatelessWidget {
   final int postId;
@@ -13,7 +14,7 @@ class CommentsScreen extends StatelessWidget {
     postStore.loadComments(postId);
 
     return Scaffold(
-      appBar: AppBar(title: const Text("Comments")),
+      appBar: const CustomAppBar(title: 'Comments'),
       body: Observer(
         builder: (_) {
           if (postStore.isLoading) {
@@ -21,7 +22,7 @@ class CommentsScreen extends StatelessWidget {
           }
 
           if (postStore.errorMessage != null) {
-            return Center(child: Text("Error: ${postStore.errorMessage}"));
+            return Center(child: Text('Error: ${postStore.errorMessage}',),);
           }
 
           return ListView.builder(
