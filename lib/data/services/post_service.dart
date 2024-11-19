@@ -2,12 +2,14 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:flutter_home_work11/data/models/post.dart';
 import 'package:flutter_home_work11/data/models/comment.dart';
+import 'package:flutter_home_work11/data/constants/api_constants.dart';
 
 class PostService {
-  final String baseUrl = 'https://jsonplaceholder.typicode.com';
+  final String baseUrl = ApiConstants.baseUrl;
 
   Future<List<Post>> fetchPosts() async {
-    final response = await http.get(Uri.parse('$baseUrl/posts'));
+    final response =
+        await http.get(Uri.parse('$baseUrl${ApiConstants.postsEndpoint}'));
 
     if (response.statusCode == 200) {
       final List<dynamic> data = json.decode(response.body);
@@ -18,7 +20,8 @@ class PostService {
   }
 
   Future<List<Comment>> fetchComments(int postId) async {
-    final response = await http.get(Uri.parse('$baseUrl/posts/$postId/comments'));
+    final response = await http.get(Uri.parse(
+        '$baseUrl${ApiConstants.postsEndpoint}/$postId${ApiConstants.commentsEndpoint}',),);
 
     if (response.statusCode == 200) {
       final List<dynamic> data = json.decode(response.body);
