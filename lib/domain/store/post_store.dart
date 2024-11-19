@@ -8,6 +8,9 @@ part 'post_store.g.dart';
 class PostStore = PostStoreBase with _$PostStore;
 
 abstract class PostStoreBase with Store {
+  PostStoreBase() {
+    init();
+  }
   final PostService postService = PostService();
 
   @observable
@@ -21,10 +24,6 @@ abstract class PostStoreBase with Store {
 
   @observable
   bool isLoading = false;
-
-  PostStoreBase() {
-    init();
-  }
 
   @action
   Future<void> init() async {

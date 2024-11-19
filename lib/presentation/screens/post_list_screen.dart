@@ -31,14 +31,6 @@ class _PostListScreenState extends State<PostListScreen> {
     super.dispose();
   }
 
-  void _scrollToTop() {
-    _scrollController.animateTo(
-      0,
-      duration: const Duration(milliseconds: 500),
-      curve: Curves.easeInOut,
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -156,11 +148,21 @@ class _PostListScreenState extends State<PostListScreen> {
       floatingActionButton: Observer(
         builder: (_) => scrollStore.showScrollToTopButton
             ? FloatingActionButton(
+                shape: const CircleBorder(),
+                backgroundColor: Colors.blue,
                 onPressed: _scrollToTop,
-                child: const Icon(Icons.arrow_upward),
+                child: const Icon(Icons.arrow_upward, color: Colors.white,),
               )
             : const SizedBox.shrink(),
       ),
+    );
+  }
+
+  void _scrollToTop() {
+    _scrollController.animateTo(
+      0,
+      duration: const Duration(milliseconds: 500),
+      curve: Curves.easeInOut,
     );
   }
 }

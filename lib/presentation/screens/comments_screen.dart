@@ -6,10 +6,9 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter_home_work11/presentation/styles/text_styles.dart';
 
 class CommentsScreen extends StatelessWidget {
+  CommentsScreen({super.key, required this.postId});
   final int postId;
   final PostStore postStore = PostStore();
-
-  CommentsScreen({super.key, required this.postId});
 
   @override
   Widget build(BuildContext context) {
